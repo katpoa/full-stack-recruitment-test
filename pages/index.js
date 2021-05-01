@@ -89,10 +89,11 @@ const List = ({ flights, itineraries }) => (
 const Container = styled.div`
     background: white;
     padding: 15px;
-    height: 30vh;
+    height: 27vh;
     margin-bottom: 20px;
     border-radius: 7px;
     box-shadow: 0px 3px 3px rgba(0,0,0,0.2);
+    justify-content: space-between;
 `;
 
 const Flight = styled.div`
@@ -115,6 +116,7 @@ const Icon = styled.img`
 const Point = styled.div`
     display: flex;
     flex-direction: column;
+    margin: 0 5px 0 5px;
 `;
 
 const Time = styled.div`
