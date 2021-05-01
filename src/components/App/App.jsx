@@ -4,7 +4,7 @@ import axios from 'axios';
 import Header from '../Header';
 import List from '../List';
 
-import STYLES from './App.scss';
+import STYLES from './App.module.scss';
 
 const getClassName = (className) => STYLES[className] || 'UNKNOWN';
 

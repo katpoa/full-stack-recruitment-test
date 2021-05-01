@@ -8,8 +8,9 @@
   "version": "1.0.0",
   "description": "Skyscanner full-stack recruitment test.",
   "scripts": {
+    "dev": "next dev",
+    "build": "next build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "CI=true react-scripts test"
   },
   "devDependencies": {
@@ -22,7 +23,8 @@
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-test-renderer": "^16.11.0",
-    "styled-components": "^5.2.3"
+    "styled-components": "^5.2.3",
+    "babel-plugin-styled-components": "latest"
   },
   "browserslist": [
     ">0.1%",
@@ -32,6 +34,7 @@
   ],
   "dependencies": {
     "@material-ui/core": "^4.11.4",
-    "@material-ui/icons": "^4.11.2"
+    "@material-ui/icons": "^4.11.2",
+    "sass": "^1.32.12"
   }
 }

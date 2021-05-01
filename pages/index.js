@@ -1,7 +1,90 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+import APP_STYLES from '../src/components/App/App.module.scss';
+import logo from '../public/logo.svg';
+import HEADER_STYLES from '../src/components/Header/Header.module.scss';
+
 
 import styled from 'styled-components';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+
+const app_getClassName = (className) => APP_STYLES[className] || 'UNKNOWN';
+
+const App = () => {
+  const [flights, setFlights] = useState([]);
+  const [itineraries, setItineraries] = useState([]);
+
+  const getFlights = async () => {
+    axios.get('flights.json')
+      .then(res => {
+        setFlights(res.data);
+      })
+      .catch(e => {throw new Error(e)});
+  };
+  // wrangle data so that in itineraries, legs correspond properly
+  useEffect(() => { getFlights() }, []);
+
+  const getItineraries = async () => {
+    axios.get('flights.json')
+      .then(res => {
+        setItineraries(res.data.itineraries);
+      })
+      .catch(e => {throw new Error(e)});
+  };
+  // wrangle data so that in itineraries, legs correspond properly
+  useEffect(() => { getItineraries()} , []);
+
+
+  return (
+    <div className={app_getClassName('App')}>
+      <Header />
+      <main className={app_getClassName('App__main')} style={{background: 'hsl(260deg 12% 95%)'}}>
+        {flights && itineraries ? <List flights={flights} itineraries={itineraries} /> : <>Loading...</>}
+      </main>
+    </div>
+  );
+};
+
+// App.getInitialProps = async () => {
+//     try {
+//         const res = await axios.get('flights.json')
+//         const { data } = res;
+//         // console.log("FETCHING DATA INSIDE GETINITIALPROPS");
+//         return { flights: data, itineraries: data.itineraries };
+//     } catch (e) {
+//         throw new Error(e);
+//     }
+//     // we want first fetch to be server-side rendered! Mounting related to DOM, which server-side doesn't have
+//     // ReactDOMServer
+// };
+
+
+const header_getClassName = (className) => HEADER_STYLES[className] || 'UNKNOWN';
+
+const Header = () => (
+  <header className={header_getClassName('Header')}>
+    <a href="/">
+      <span className={header_getClassName('Header__hidden-text')}>Skyscanner</span>
+      <img
+        className={header_getClassName('Header__logo-image')}
+        alt="Skyscanner"
+        src={logo}
+      />
+    </a>
+  </header>
+);
+
+const List = ({ flights, itineraries }) => (
+    <div>
+      {itineraries.map(itinerary => {
+        let currentLegs = flights.legs.filter(leg => (leg.id === itinerary.legs[0]) || (leg.id === itinerary.legs[1] ));
+        return (
+          <Entry key={itinerary.id} itinerary={itinerary} legs={currentLegs}/>
+        );
+      })}
+    </div>
+);
 
 const Container = styled.div`
     background: white;
@@ -141,7 +224,7 @@ const Entry = ({ itinerary, legs }) => {
                     <div style={{fontSize: '2rem', margin: '10px'}}>
                         {itinerary.price}
                     </div>
-                    <div style={{fontSize: '1rem', color: 'hsl(250deg 10% 76%)'}}>
+                    <div style={{color: 'hsl(250deg 10% 76%)'}}>
                         {itinerary.agent}
                     </div>
                 </Point>
@@ -151,4 +234,4 @@ const Entry = ({ itinerary, legs }) => {
     );
 };
 
-export default Entry;
+export default App;
