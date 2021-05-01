@@ -1,6 +1,7 @@
 import React from 'react';
 
 import styled from 'styled-components';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 const Container = styled.div`
     background: white;
@@ -24,8 +25,8 @@ const Leg = styled.div`
 `;
 
 const Icon = styled.img`
-    width: 30px;
-    height: 30px;
+    width: 33px;
+    height: 33px;
 `;
 
 const Point = styled.div`
@@ -42,6 +43,12 @@ const Airport = styled.div`
     font-size: 19px;
     margin: 10px 10px 0 10px;
     color: grey;
+`;
+
+const Travel = styled.div`
+    display: flex;
+    margin-right: 0;
+    flex-direction: column;
 `;
 
 const Footer = styled.div`
@@ -80,6 +87,7 @@ const Entry = ({ itinerary, legs }) => {
                             {legs[0].departure_airport}
                         </Airport>
                     </Point>
+                    <ArrowForwardIcon color='disabled' style={{marginTop: '10px'}}/>
                     <Point>
                         <Time>
                             {legs[0].arrival_time.slice(11,)}
@@ -89,6 +97,44 @@ const Entry = ({ itinerary, legs }) => {
                         </Airport>            
                     </Point>
                 </Leg>
+                <Travel>
+                    <div style={{color: 'hsl(250deg 10% 76%)'}}>
+                        {travel_time_1}
+                    </div>
+                    <>
+                        {stops_1}
+                    </>
+                </Travel>
+            </Flight>
+            <Flight>
+                <Leg>
+                    <Icon src={`https://logos.skyscnr.com/images/airlines/favicon/${legs[1].airline_id}.png`}/>
+                    <Point>
+                        <Time>
+                            {legs[1].departure_time.slice(11,)}
+                        </Time>
+                        <Airport>
+                            {legs[1].departure_airport}
+                        </Airport>
+                    </Point>
+                    <ArrowForwardIcon color='disabled' style={{marginTop: '10px'}}/>
+                    <Point>
+                        <Time>
+                            {legs[1].arrival_time.slice(11,)}
+                        </Time>
+                        <Airport>
+                            {legs[1].arrival_airport}
+                        </Airport>            
+                    </Point>
+                </Leg>
+                <Travel>
+                    <div style={{color: 'hsl(250deg 10% 76%)'}}>
+                        {travel_time_2}
+                    </div>
+                    <>
+                        {stops_2}
+                    </>
+                </Travel>
             </Flight>
             <Footer>
                 <Point>

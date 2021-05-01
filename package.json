@@ -18,6 +18,7 @@
     "bpk-component-text": "^3.1.35",
     "bpk-mixins": "^20.1.17",
     "bpk-stylesheets": "^6.0.67",
+    "next": "^10.2.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-test-renderer": "^16.11.0",
@@ -28,5 +29,9 @@
     "not dead",
     "not ie <= 10",
     "not op_mini all"
-  ]
+  ],
+  "dependencies": {
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2"
+  }
 }
